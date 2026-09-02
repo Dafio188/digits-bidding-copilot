@@ -24,7 +24,8 @@ import {
   Printer,
   FileType2,
   Sparkles,
-  CheckCheck
+  CheckCheck,
+  Users
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -269,11 +270,13 @@ export default function App() {
     }
   };
 
-  // Caricamento iniziale dei bandi (usa la ricerca live con fallback automatico)
+  // Caricamento iniziale dei bandi (eseguito solo se l'utente è autenticato)
   useEffect(() => {
-    handleSearchTenders(true);
-    fetchProducts();
-  }, []);
+    if (isAuthenticated) {
+      handleSearchTenders(true);
+      fetchProducts();
+    }
+  }, [isAuthenticated]);
 
   // Salva il contesto di analisi e l'offerta per la gara corrente su server e localStorage
   const saveTenderAnalysisContext = (tenderId: string, stateToSave?: any) => {
