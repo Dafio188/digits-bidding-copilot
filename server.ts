@@ -74,7 +74,7 @@ async function parsePdf(dataBuffer: Buffer): Promise<{ text: string }> {
 
 import { dailyIncrementalJob } from './ingestion.js';
 import { startJobLog, completeJobLog, getJobLog, getLastJobStatus } from './server/jobLogger.js';
-import { requireAuth, handleLogin } from './server/auth.ts';
+import { requireAuth, requireAdmin, handleLogin } from './server/auth.ts';
 
 export interface Product { id: string; codeOEM: string; description: string; brand: string; costPrice: number; retailPrice: number; stock: number; isTenderSpecific?: boolean; }
 import { parse } from 'csv-parse/sync';
@@ -127,8 +127,8 @@ app.get('/api/auth/me', requireAuth, (req, res) => {
 // Middleware di autenticazione globale applicato a tutti gli endpoint /api/*
 app.use('/api', requireAuth);
 
-// ─── ENDPOINT GESTIONE UTENTI (ACCESSO AMMINISTRATORE) ────────────────────────
-app.get('/api/users', async (req, res) => {
+// ─── ENDPOINT GESTIONE UTENTI (ACCESSO ESCLUSIVO AMMINISTRATORE) ───────────────
+app.get('/api/users', requireAdmin, async (req, res) => {
   try {
     const users = await getAppUsersPg();
     res.json({ success: true, users });
@@ -137,7 +137,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-app.post('/api/users', async (req, res) => {
+app.post('/api/users', requireAdmin, async (req, res) => {
   const { username, password, role } = req.body || {};
   if (!username || !password) {
     return res.status(400).json({ error: 'Username ed password sono obbligatori.' });
@@ -149,7 +149,7 @@ app.post('/api/users', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
     const newUser = await createAppUserPg(username, passwordHash, role || 'operatore');
-    await logActivityPg('USER_CREATED', `Creato nuovo utente: ${username} (Ruolo: ${role || 'operatore'})`);
+    await logActivityPg('USER_CREATED', `Creato nuovo utente: ${username} (Ruolo: ${role || 'operatore'}) da admin ${req.user?.username}`);
     res.json({ success: true, user: newUser });
   } catch (err: any) {
     if (err.message && err.message.includes('unique')) {
@@ -159,7 +159,7 @@ app.post('/api/users', async (req, res) => {
   }
 });
 
-app.patch('/api/users/:id/toggle', async (req, res) => {
+app.patch('/api/users/:id/toggle', requireAdmin, async (req, res) => {
   const id = parseInt(req.params.id);
   const { isActive } = req.body;
   if (isNaN(id) || typeof isActive !== 'boolean') {
@@ -167,21 +167,21 @@ app.patch('/api/users/:id/toggle', async (req, res) => {
   }
   try {
     const success = await toggleAppUserStatusPg(id, isActive);
-    await logActivityPg('USER_STATUS_TOGGLED', `Stato utente #${id} impostato su: ${isActive ? 'ATTIVO' : 'DISABILITATO'}`);
+    await logActivityPg('USER_STATUS_TOGGLED', `Stato utente #${id} impostato su: ${isActive ? 'ATTIVO' : 'DISABILITATO'} da admin ${req.user?.username}`);
     res.json({ success, isActive });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
 });
 
-app.delete('/api/users/:id', async (req, res) => {
+app.delete('/api/users/:id', requireAdmin, async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) {
     return res.status(400).json({ error: 'ID utente non valido.' });
   }
   try {
     const success = await deleteAppUserPg(id);
-    await logActivityPg('USER_DELETED', `Eliminato utente #${id}`);
+    await logActivityPg('USER_DELETED', `Eliminato utente #${id} da admin ${req.user?.username}`);
     res.json({ success });
   } catch (err: any) {
     res.status(500).json({ error: err.message });

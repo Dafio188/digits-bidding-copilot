@@ -1399,17 +1399,25 @@ Il presente documento deve essere firmato digitalmente ai sensi del D.Lgs. 82/20
               Profilo Azienda
             </button>
 
-            <button 
-              onClick={() => setActiveTab('UTENTI')}
-              className={`flex items-center gap-2.5 w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
-                activeTab === 'UTENTI' 
-                  ? 'bg-blue-600 text-white shadow-sm' 
-                  : 'text-neutral-600 hover:bg-neutral-100/80'
-              }`}
-            >
-              <Users size={15} />
-              Gestione Utenti & Accessi
-            </button>
+            {/* Gestione Utenti & Accessi: visibile ESCLUSIVAMENTE all'Amministratore */}
+            {authUser?.role === 'admin' && (
+              <button 
+                onClick={() => setActiveTab('UTENTI')}
+                className={`flex items-center justify-between w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                  activeTab === 'UTENTI' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
+                    : 'text-neutral-600 hover:bg-neutral-100/80'
+                }`}
+              >
+                <span className="flex items-center gap-2.5">
+                  <Users size={15} />
+                  Gestione Utenti & Accessi
+                </span>
+                <span className="text-[9px] bg-blue-100 text-blue-700 font-mono font-bold px-1.5 py-0.5 rounded uppercase">
+                  Admin
+                </span>
+              </button>
+            )}
 
             {/* Sezione Avanzata */}
             <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mt-4 mb-1.5 px-3">
@@ -1473,11 +1481,20 @@ Il presente documento deve essere firmato digitalmente ai sensi del D.Lgs. 82/20
             </button>
           </div>
 
-          {/* Dati Aziendali in basso */}
-          <div className="mt-auto p-3 bg-neutral-100/70 border border-neutral-200/40 rounded-xl text-xs flex flex-col gap-1 select-none font-sans">
-            <div className="font-semibold text-neutral-700 truncate">{profile.name}</div>
+          {/* Dati Aziendali e Profilo Utente Loggato in basso */}
+          <div className="mt-auto p-3 bg-neutral-100/70 border border-neutral-200/40 rounded-xl text-xs flex flex-col gap-1.5 select-none font-sans">
+            <div className="flex items-center justify-between pb-1 border-b border-neutral-200/50">
+              <span className="text-[10px] text-neutral-400 font-semibold truncate max-w-[130px]" title={authUser?.username}>
+                👤 {authUser?.username || 'Utente'}
+              </span>
+              <span className={`text-[9px] font-mono font-bold px-1.5 py-0.2 rounded uppercase ${
+                authUser?.role === 'admin' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'
+              }`}>
+                {authUser?.role || 'operatore'}
+              </span>
+            </div>
+            <div className="font-semibold text-neutral-700 truncate text-[11px]">{profile.name}</div>
             <div className="text-[10px] text-neutral-400 font-mono">P.IVA: {profile.vatNumber}</div>
-            <div className="text-[10px] text-emerald-600 font-bold mt-0.5">Fatturato: €{profile.maxTenderValue.toLocaleString('it-IT')}</div>
           </div>
         </section>
 
@@ -2739,6 +2756,7 @@ Il presente documento deve essere firmato digitalmente ai sensi del D.Lgs. 82/20
                 className="h-full overflow-y-auto custom-scrollbar"
               >
                 <CompanyProfilePanel
+                  userRole={authUser?.role}
                   onProfileChange={(updatedProfile) => {
                     setProfile(updatedProfile as any);
                     showToast('✅ Profilo societario aggiornato!');
@@ -2747,8 +2765,8 @@ Il presente documento deve essere firmato digitalmente ai sensi del D.Lgs. 82/20
               </motion.div>
             )}
 
-            {/* VISTA DEDICATA: GESTIONE UTENTI & ACCESSI */}
-            {activeTab === 'UTENTI' && (
+            {/* VISTA DEDICATA: GESTIONE UTENTI & ACCESSI (SOLO ADMIN) */}
+            {activeTab === 'UTENTI' && authUser?.role === 'admin' && (
               <motion.div
                 key="tab-utenti"
                 initial={{ opacity: 0, y: 10 }}
@@ -2757,6 +2775,7 @@ Il presente documento deve essere firmato digitalmente ai sensi del D.Lgs. 82/20
                 className="h-full overflow-y-auto custom-scrollbar"
               >
                 <CompanyProfilePanel
+                  userRole={authUser?.role}
                   initialSection="utenti"
                   onProfileChange={(updatedProfile) => {
                     setProfile(updatedProfile as any);

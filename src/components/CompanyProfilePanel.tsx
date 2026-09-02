@@ -38,9 +38,10 @@ interface AppUser {
 interface Props {
   onProfileChange?: (p: CompanyProfile) => void;
   initialSection?: string;
+  userRole?: string;
 }
 
-export function CompanyProfilePanel({ onProfileChange, initialSection }: Props) {
+export function CompanyProfilePanel({ onProfileChange, initialSection, userRole = 'operatore' }: Props) {
   const [profile, setProfile] = useState<CompanyProfile>(EMPTY_PROFILE);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -76,8 +77,10 @@ export function CompanyProfilePanel({ onProfileChange, initialSection }: Props) 
         setLoading(false);
       })
       .catch(() => setLoading(false));
-    fetchUsers();
-  }, []);
+    if (userRole === 'admin') {
+      fetchUsers();
+    }
+  }, [userRole]);
 
   const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -220,7 +223,7 @@ export function CompanyProfilePanel({ onProfileChange, initialSection }: Props) 
     { id: 'certificazioni', label: 'Certificazioni & Qualificazioni', icon: Award },
     { id: 'documenti', label: 'Documenti Societari', icon: FileText },
     { id: 'fatturato', label: 'Fatturato & Referenze PA', icon: TrendingUp },
-    { id: 'utenti', label: 'Accessi & Profili Utente (Abilita/Disabilita)', icon: Users },
+    ...(userRole === 'admin' ? [{ id: 'utenti', label: 'Accessi & Profili Utente (Abilita/Disabilita)', icon: Users }] : []),
   ];
 
   return (

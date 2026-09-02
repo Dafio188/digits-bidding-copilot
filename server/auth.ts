@@ -167,3 +167,16 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   req.user = decoded;
   next();
 }
+
+/**
+ * Middleware che autorizza SOLO gli utenti con ruolo 'admin'
+ */
+export function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({
+      error: 'Accesso negato. Solo gli amministratori possono gestire gli utenti e le credenziali.',
+      code: 'FORBIDDEN_ADMIN_ONLY'
+    });
+  }
+  next();
+}
