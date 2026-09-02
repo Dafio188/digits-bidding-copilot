@@ -37,14 +37,15 @@ interface AppUser {
 
 interface Props {
   onProfileChange?: (p: CompanyProfile) => void;
+  initialSection?: string;
 }
 
-export function CompanyProfilePanel({ onProfileChange }: Props) {
+export function CompanyProfilePanel({ onProfileChange, initialSection }: Props) {
   const [profile, setProfile] = useState<CompanyProfile>(EMPTY_PROFILE);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [openSection, setOpenSection] = useState<string | null>('anagrafica');
+  const [openSection, setOpenSection] = useState<string | null>(initialSection || 'anagrafica');
   const [editingCert, setEditingCert] = useState<Partial<Certification> | null>(null);
   const [editingDoc, setEditingDoc] = useState<Partial<SocietalDocument> | null>(null);
 

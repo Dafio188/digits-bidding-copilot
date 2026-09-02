@@ -1396,6 +1396,18 @@ Il presente documento deve essere firmato digitalmente ai sensi del D.Lgs. 82/20
               Profilo Azienda
             </button>
 
+            <button 
+              onClick={() => setActiveTab('UTENTI')}
+              className={`flex items-center gap-2.5 w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                activeTab === 'UTENTI' 
+                  ? 'bg-blue-600 text-white shadow-sm' 
+                  : 'text-neutral-600 hover:bg-neutral-100/80'
+              }`}
+            >
+              <Users size={15} />
+              Gestione Utenti & Accessi
+            </button>
+
             {/* Sezione Avanzata */}
             <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mt-4 mb-1.5 px-3">
               Strumenti PA
@@ -2727,6 +2739,24 @@ Il presente documento deve essere firmato digitalmente ai sensi del D.Lgs. 82/20
                   onProfileChange={(updatedProfile) => {
                     setProfile(updatedProfile as any);
                     showToast('✅ Profilo societario aggiornato!');
+                  }}
+                />
+              </motion.div>
+            )}
+
+            {/* VISTA DEDICATA: GESTIONE UTENTI & ACCESSI */}
+            {activeTab === 'UTENTI' && (
+              <motion.div
+                key="tab-utenti"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="h-full overflow-y-auto custom-scrollbar"
+              >
+                <CompanyProfilePanel
+                  initialSection="utenti"
+                  onProfileChange={(updatedProfile) => {
+                    setProfile(updatedProfile as any);
                   }}
                 />
               </motion.div>
