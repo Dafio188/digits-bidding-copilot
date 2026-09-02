@@ -98,6 +98,16 @@ export async function initPostgresTables(): Promise<void> {
         metadata_json JSONB,
         created_at TIMESTAMPTZ DEFAULT NOW()
       );
+
+      CREATE TABLE IF NOT EXISTS app_users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        role VARCHAR(50) DEFAULT 'operatore',
+        is_active BOOLEAN DEFAULT TRUE,
+        created_at TIMESTAMPTZ DEFAULT NOW(),
+        updated_at TIMESTAMPTZ DEFAULT NOW()
+      );
     `);
     console.log('✅ [PostgreSQL Cloud Neon] Tabelle relazionali attive.');
   } catch (err: any) {
@@ -516,3 +526,60 @@ export async function syncLocalJsonToNeon(): Promise<void> {
     console.error('❌ [PostgreSQL Neon] Errore sincronizzazione JSON:', err.message);
   }
 }
+
+// ─── GESTIONE UTENTI (APP USERS) ───────────────────────────────────────────────
+export async function getAppUsersPg(): Promise<any[]> {
+  try {
+    const res = await pool.query(
+      'SELECT id, username, role, is_active as "isActive", created_at as "createdAt" FROM app_users ORDER BY id ASC'
+    );
+    return res.rows;
+  } catch (err: any) {
+    console.error('[PostgreSQL] Errore lettura utenti app:', err.message);
+    return [];
+  }
+}
+
+export async function findAppUserByUsernamePg(username: string): Promise<any | null> {
+  try {
+    const res = await pool.query(
+      'SELECT id, username, password_hash as "passwordHash", role, is_active as "isActive" FROM app_users WHERE LOWER(username) = LOWER($1)',
+      [username.trim()]
+    );
+    return res.rows[0] || null;
+  } catch (err: any) {
+    console.error('[PostgreSQL] Errore ricerca utente:', err.message);
+    return null;
+  }
+}
+
+export async function createAppUserPg(username: string, passwordHash: string, role: string = 'operatore'): Promise<any> {
+  const query = `
+    INSERT INTO app_users (username, password_hash, role, is_active, created_at, updated_at)
+    VALUES ($1, $2, $3, TRUE, NOW(), NOW())
+    RETURNING id, username, role, is_active as "isActive", created_at as "createdAt";
+  `;
+  const res = await pool.query(query, [username.trim(), passwordHash, role]);
+  return res.rows[0];
+}
+
+export async function toggleAppUserStatusPg(id: number, isActive: boolean): Promise<boolean> {
+  try {
+    await pool.query('UPDATE app_users SET is_active = $1, updated_at = NOW() WHERE id = $2', [isActive, id]);
+    return true;
+  } catch (err: any) {
+    console.error('[PostgreSQL] Errore toggle status utente:', err.message);
+    return false;
+  }
+}
+
+export async function deleteAppUserPg(id: number): Promise<boolean> {
+  try {
+    await pool.query('DELETE FROM app_users WHERE id = $1', [id]);
+    return true;
+  } catch (err: any) {
+    console.error('[PostgreSQL] Errore eliminazione utente:', err.message);
+    return false;
+  }
+}
+

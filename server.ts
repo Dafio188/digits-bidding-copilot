@@ -24,8 +24,13 @@ import {
   logActivityPg,
   getAuditLogPg,
   replaceProductsPg,
-  purgeUnparticipatedExpiredTendersPg
+  purgeUnparticipatedExpiredTendersPg,
+  getAppUsersPg,
+  createAppUserPg,
+  toggleAppUserStatusPg,
+  deleteAppUserPg
 } from "./postgres.ts";
+import bcrypt from 'bcryptjs';
 
 // Inizializzazione PostgreSQL Neon all'avvio
 (async () => {
@@ -121,6 +126,67 @@ app.get('/api/auth/me', requireAuth, (req, res) => {
 
 // Middleware di autenticazione globale applicato a tutti gli endpoint /api/*
 app.use('/api', requireAuth);
+
+// ─── ENDPOINT GESTIONE UTENTI (ACCESSO AMMINISTRATORE) ────────────────────────
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await getAppUsersPg();
+    res.json({ success: true, users });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/users', async (req, res) => {
+  const { username, password, role } = req.body || {};
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username ed password sono obbligatori.' });
+  }
+  if (password.length < 6) {
+    return res.status(400).json({ error: 'La password deve contenere almeno 6 caratteri.' });
+  }
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(password, salt);
+    const newUser = await createAppUserPg(username, passwordHash, role || 'operatore');
+    await logActivityPg('USER_CREATED', `Creato nuovo utente: ${username} (Ruolo: ${role || 'operatore'})`);
+    res.json({ success: true, user: newUser });
+  } catch (err: any) {
+    if (err.message && err.message.includes('unique')) {
+      return res.status(409).json({ error: 'Questo username/email è già registrato.' });
+    }
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.patch('/api/users/:id/toggle', async (req, res) => {
+  const id = parseInt(req.params.id);
+  const { isActive } = req.body;
+  if (isNaN(id) || typeof isActive !== 'boolean') {
+    return res.status(400).json({ error: 'Parametri non validi.' });
+  }
+  try {
+    const success = await toggleAppUserStatusPg(id, isActive);
+    await logActivityPg('USER_STATUS_TOGGLED', `Stato utente #${id} impostato su: ${isActive ? 'ATTIVO' : 'DISABILITATO'}`);
+    res.json({ success, isActive });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.delete('/api/users/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).json({ error: 'ID utente non valido.' });
+  }
+  try {
+    const success = await deleteAppUserPg(id);
+    await logActivityPg('USER_DELETED', `Eliminato utente #${id}`);
+    res.json({ success });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 
 // Inizializzazione client Google Gemini

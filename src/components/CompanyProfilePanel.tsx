@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Building2, Award, FileText, TrendingUp, Plus, Trash2, Save,
-  CheckCircle2, AlertTriangle, XCircle, ChevronDown, ChevronUp, Edit3, X
+  CheckCircle2, AlertTriangle, XCircle, ChevronDown, ChevronUp, Edit3, X,
+  Users, UserPlus, Shield, ToggleLeft, ToggleRight
 } from 'lucide-react';
 import type { CompanyProfile, Certification, SocietalDocument, TurnoverEntry } from '../types';
 
@@ -26,6 +27,14 @@ const EMPTY_PROFILE: CompanyProfile = {
   paReferences: [],
 };
 
+interface AppUser {
+  id: number;
+  username: string;
+  role: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
 interface Props {
   onProfileChange?: (p: CompanyProfile) => void;
 }
@@ -39,6 +48,25 @@ export function CompanyProfilePanel({ onProfileChange }: Props) {
   const [editingCert, setEditingCert] = useState<Partial<Certification> | null>(null);
   const [editingDoc, setEditingDoc] = useState<Partial<SocietalDocument> | null>(null);
 
+  // Stato gestione utenti e credenziali di accesso
+  const [users, setUsers] = useState<AppUser[]>([]);
+  const [newUsername, setNewUsername] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newUserRole, setNewUserRole] = useState<'operatore' | 'admin'>('operatore');
+  const [userActionMsg, setUserActionMsg] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+
+  const fetchUsers = async () => {
+    try {
+      const res = await fetch('/api/users');
+      if (res.ok) {
+        const data = await res.json();
+        setUsers(data.users || []);
+      }
+    } catch (err) {
+      console.error("Errore fetch users:", err);
+    }
+  };
+
   useEffect(() => {
     fetch('/api/company-profile')
       .then(r => r.json())
@@ -47,7 +75,66 @@ export function CompanyProfilePanel({ onProfileChange }: Props) {
         setLoading(false);
       })
       .catch(() => setLoading(false));
+    fetchUsers();
   }, []);
+
+  const handleCreateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newUsername || !newPassword) return;
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: newUsername, password: newPassword, role: newUserRole }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setUserActionMsg({ text: `✅ Profilo "${newUsername}" creato con successo!`, type: 'success' });
+        setNewUsername('');
+        setNewPassword('');
+        fetchUsers();
+      } else {
+        setUserActionMsg({ text: `⚠️ ${data.error || 'Errore nella creazione dell\'utente'}`, type: 'error' });
+      }
+    } catch (err) {
+      setUserActionMsg({ text: '⚠️ Errore di connessione', type: 'error' });
+    }
+    setTimeout(() => setUserActionMsg(null), 4000);
+  };
+
+  const handleToggleUser = async (user: AppUser) => {
+    try {
+      const res = await fetch(`/api/users/${user.id}/toggle`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isActive: !user.isActive }),
+      });
+      if (res.ok) {
+        setUserActionMsg({
+          text: `Stato di ${user.username} impostato su: ${!user.isActive ? 'ATTIVO 🟢' : 'DISABILITATO 🔴'}`,
+          type: 'success'
+        });
+        fetchUsers();
+      }
+    } catch (err) {
+      setUserActionMsg({ text: '⚠️ Impossibile aggiornare lo stato', type: 'error' });
+    }
+    setTimeout(() => setUserActionMsg(null), 3000);
+  };
+
+  const handleDeleteUser = async (id: number, uname: string) => {
+    if (!confirm(`Sei sicuro di voler eliminare definitivamente il profilo di accesso "${uname}"?`)) return;
+    try {
+      const res = await fetch(`/api/users/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setUserActionMsg({ text: `Profilo ${uname} eliminato.`, type: 'success' });
+        fetchUsers();
+      }
+    } catch (err) {
+      setUserActionMsg({ text: '⚠️ Errore durante l\'eliminazione', type: 'error' });
+    }
+    setTimeout(() => setUserActionMsg(null), 3000);
+  };
 
   const save = async () => {
     setSaving(true);
@@ -132,6 +219,7 @@ export function CompanyProfilePanel({ onProfileChange }: Props) {
     { id: 'certificazioni', label: 'Certificazioni & Qualificazioni', icon: Award },
     { id: 'documenti', label: 'Documenti Societari', icon: FileText },
     { id: 'fatturato', label: 'Fatturato & Referenze PA', icon: TrendingUp },
+    { id: 'utenti', label: 'Accessi & Profili Utente (Abilita/Disabilita)', icon: Users },
   ];
 
   return (
@@ -456,6 +544,146 @@ export function CompanyProfilePanel({ onProfileChange }: Props) {
                           </button>
                         </div>
                       </>
+                    )}
+
+                    {section.id === 'utenti' && (
+                      <div className="space-y-4">
+                        {userActionMsg && (
+                          <div className={`p-2.5 rounded-xl text-xs font-semibold ${userActionMsg.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+                            {userActionMsg.text}
+                          </div>
+                        )}
+
+                        {/* Modulo Aggiunta Nuovo Utente */}
+                        <form onSubmit={handleCreateUser} className="p-3 bg-neutral-100/60 rounded-xl border border-neutral-200/70 flex flex-col gap-2.5">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-neutral-700 flex items-center gap-1.5">
+                              <UserPlus size={13} className="text-blue-600" />
+                              Crea Nuovo Profilo di Accesso
+                            </span>
+                            <span className="text-[10px] text-neutral-400">Potrai disabilitarlo in qualsiasi momento</span>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <div>
+                              <label className="text-[10px] font-semibold text-neutral-500 mb-0.5 block">Email / Username</label>
+                              <input 
+                                type="text"
+                                placeholder="es. operatore@digits.it"
+                                value={newUsername}
+                                onChange={(e) => setNewUsername(e.target.value)}
+                                required
+                                className="w-full text-xs border border-neutral-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-500 bg-white"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-[10px] font-semibold text-neutral-500 mb-0.5 block">Password (min. 6 car.)</label>
+                              <input 
+                                type="password"
+                                placeholder="••••••••"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                required
+                                minLength={6}
+                                className="w-full text-xs border border-neutral-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-500 bg-white"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-[10px] font-semibold text-neutral-500 mb-0.5 block">Ruolo</label>
+                              <select 
+                                value={newUserRole}
+                                onChange={(e: any) => setNewUserRole(e.target.value)}
+                                className="w-full text-xs border border-neutral-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-500 bg-white"
+                              >
+                                <option value="operatore">Operatore (Gestione Gare)</option>
+                                <option value="admin">Amministratore</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <button 
+                            type="submit"
+                            className="btn-primary text-xs py-1.5 px-3 self-end font-semibold flex items-center gap-1 cursor-pointer"
+                          >
+                            <Plus size={12} />
+                            <span>Crea Profilo</span>
+                          </button>
+                        </form>
+
+                        {/* Elenco Utenti & Switch Toggle */}
+                        <div className="space-y-2">
+                          <div className="text-xs font-bold text-neutral-500 uppercase tracking-wider">Profili Registrati ({users.length})</div>
+                          {users.length === 0 ? (
+                            <div className="text-center py-4 text-xs text-neutral-400 bg-neutral-50 rounded-xl border border-neutral-100">
+                              Nessun profilo aggiuntivo creato oltre all'amministratore master.
+                            </div>
+                          ) : (
+                            users.map(u => (
+                              <div 
+                                key={u.id}
+                                className={`p-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${
+                                  u.isActive 
+                                    ? 'bg-white border-neutral-200 shadow-xs' 
+                                    : 'bg-neutral-50/80 border-neutral-200 opacity-60'
+                                }`}
+                              >
+                                <div className="flex items-center gap-2.5 min-w-0">
+                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${u.isActive ? 'bg-blue-100 text-blue-700' : 'bg-neutral-200 text-neutral-500'}`}>
+                                    <Shield size={14} />
+                                  </div>
+                                  <div className="min-w-0">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-xs font-bold text-neutral-800 truncate">{u.username}</span>
+                                      <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-neutral-100 text-neutral-600 border border-neutral-200/50 uppercase">
+                                        {u.role}
+                                      </span>
+                                    </div>
+                                    <div className="text-[10px] text-neutral-400">
+                                      {u.isActive ? (
+                                        <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                                          Accesso Abilitato
+                                        </span>
+                                      ) : (
+                                        <span className="text-red-500 font-semibold flex items-center gap-1">
+                                          <span className="w-1.5 h-1.5 rounded-full bg-red-400 inline-block"></span>
+                                          Accesso Disabilitato (Bloccato)
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center gap-2 shrink-0 select-none">
+                                  {/* Toggle Switch */}
+                                  <button
+                                    type="button"
+                                    onClick={() => handleToggleUser(u)}
+                                    title={u.isActive ? "Clicca per disabilitare questo profilo" : "Clicca per abilitare questo profilo"}
+                                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer focus:outline-none ${
+                                      u.isActive ? 'bg-emerald-500' : 'bg-neutral-300'
+                                    }`}
+                                  >
+                                    <span
+                                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
+                                        u.isActive ? 'translate-x-6' : 'translate-x-1'
+                                      }`}
+                                    />
+                                  </button>
+
+                                  <button
+                                    onClick={() => handleDeleteUser(u.id, u.username)}
+                                    title="Elimina profilo"
+                                    className="p-1.5 text-neutral-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                                  >
+                                    <Trash2 size={13} />
+                                  </button>
+                                </div>
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      </div>
                     )}
                   </div>
                 </motion.div>

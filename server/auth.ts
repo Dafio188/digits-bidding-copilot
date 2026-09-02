@@ -53,10 +53,13 @@ export function verifyToken(token: string): UserPayload | null {
   }
 }
 
+import bcrypt from 'bcryptjs';
+import { findAppUserByUsernamePg } from '../postgres.ts';
+
 /**
  * Handler per l'endpoint di login (POST /api/auth/login)
  */
-export function handleLogin(req: Request, res: Response) {
+export async function handleLogin(req: Request, res: Response) {
   const { username, password } = req.body || {};
 
   if (!username || !password) {
@@ -66,7 +69,7 @@ export function handleLogin(req: Request, res: Response) {
   const validUsername = getAdminUsername();
   const validPassword = getAdminPassword();
 
-  // Verifica credenziali
+  // 1. Verifica utente Master Admin da variabili d'ambiente
   if (username === validUsername && password === validPassword) {
     const token = generateToken({ username, role: 'admin' });
     return res.json({
@@ -77,6 +80,36 @@ export function handleLogin(req: Request, res: Response) {
         role: 'admin'
       }
     });
+  }
+
+  // 2. Verifica utente dinamico nel Database PostgreSQL Neon
+  try {
+    const dbUser = await findAppUserByUsernamePg(username);
+    if (dbUser) {
+      // Controllo se l'account è disabilitato
+      if (!dbUser.isActive) {
+        return res.status(403).json({
+          error: 'Il tuo account è stato disabilitato dall\'amministratore. Contatta il responsabile.',
+          code: 'USER_DISABLED'
+        });
+      }
+
+      // Verifica hash password con bcrypt
+      const passwordMatch = await bcrypt.compare(password, dbUser.passwordHash);
+      if (passwordMatch) {
+        const token = generateToken({ username: dbUser.username, role: dbUser.role || 'operatore' });
+        return res.json({
+          success: true,
+          token,
+          user: {
+            username: dbUser.username,
+            role: dbUser.role || 'operatore'
+          }
+        });
+      }
+    }
+  } catch (err: any) {
+    console.error('[AUTH] Errore verifica credenziali DB:', err.message);
   }
 
   return res.status(401).json({ error: 'Credenziali di accesso non valide.' });
