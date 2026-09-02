@@ -1,0 +1,83 @@
+{
+  "tenderId": "BB00511326",
+  "capitolatoText": "SVOLGIMENTO DI 9 MOBILITA DI PCTO IN ITALIA E ALL'ESTERO (DM 88)",
+  "analysis": {
+    "tenderId": "BB00511326",
+    "authority": "Non specificata nel testo fornito",
+    "deadline": "Non indicata",
+    "criterioAggiudicazione": "Non specificato (tipicamente OEPV per progetti PCTO)",
+    "requisitiBloccanti": [
+      "Iscrizione nel registro delle imprese per attività coerenti con l'oggetto del bando",
+      "Abilitazione/Licenza per l'esercizio dell'attività di agenzia di viaggio e turismo",
+      "Assenza di motivi di esclusione di cui agli artt. 94-98 del D.Lgs. 36/2023"
+    ],
+    "lotti": [
+      {
+        "id": 1,
+        "description": "Svolgimento di 9 mobilità di PCTO in Italia e all'estero (Siviglia)",
+        "quantity": 9,
+        "estimatedValue": null,
+        "requiredSpecs": "Organizzazione viaggi, vitto, alloggio e attività di alternanza scuola-lavoro secondo quanto previsto dal DM 88",
+        "category": "servizi"
+      }
+    ],
+    "documentiRichiesti": [
+      {
+        "nome": "DGUE",
+        "descrizione": "Documento di Gara Unico Europeo",
+        "tipo": "Amministrativo",
+        "bloccante": true
+      },
+      {
+        "nome": "Offerta Tecnica",
+        "descrizione": "Dettaglio del progetto formativo e logistico",
+        "tipo": "Tecnico",
+        "bloccante": true
+      },
+      {
+        "nome": "Offerta Economica",
+        "descrizione": "Dettaglio dei costi e dei prezzi offerti",
+        "tipo": "Economico",
+        "bloccante": true
+      },
+      {
+        "nome": "PassOE",
+        "descrizione": "Documento per la verifica dei requisiti tramite sistema ANAC",
+        "tipo": "Amministrativo",
+        "bloccante": true
+      }
+    ],
+    "vincoliEsclusione": [
+      "Mancata sottoscrizione digitale dei documenti di gara",
+      "Presentazione dell'offerta oltre il termine di scadenza",
+      "Mancanza dei requisiti tecnico-professionali minimi (licenza tour operator)",
+      "Offerte parziali o condizionate se non espressamente ammesse"
+    ]
+  },
+  "compliance": null,
+  "generatedOffer": {
+    "tenderId": "BB00511326",
+    "items": [
+      {
+        "lottoId": 1,
+        "lottoDescription": "Svolgimento di 9 mobilità di PCTO in Italia e all'estero (Siviglia)",
+        "requiredQty": 9,
+        "matchedProductId": null,
+        "matchedProductOEM": null,
+        "unitCost": 0,
+        "unitPrice": 0,
+        "totalPrice": 0,
+        "marginPercentage": 0,
+        "status": "NOT_FOUND"
+      }
+    ],
+    "totalCost": 0,
+    "totalPrice": 0,
+    "totalMargin": 0,
+    "marginPercentage": 0,
+    "mepaSubmissionNote": "In riferimento alla procedura di gara per l'affidamento del servizio di mobilità PCTO (Lotto 1), si comunica che i prodotti attualmente presenti nel nostro listino aziendale, focalizzati su forniture IT (Hardware e Consumabili), non risultano compatibili con la categoria merceologica richiesta (Servizi di organizzazione viaggi e formazione). Pertanto, non è possibile formulare un'offerta tecnica ed economica per questo specifico lotto. Si precisa, ad ogni buon conto, che tutta la nostra gamma di prodotti hardware (Notebook Dell Latitude DELL-LAT5440, Lenovo ThinkPad LEN-T14-G4, PC HP HP-PC-PRO-400 e monitor MON-DELL-24) è pienamente conforme ai Criteri Ambientali Minimi (CAM) vigenti, rispettando i requisiti di efficienza energetica, durabilità e riciclabilità dei componenti. I materiali di consumo (Toner HP-CF259X e CAN-CRG057H) seguono le normative vigenti in materia di gestione dei rifiuti speciali e certificazioni ambientali."
+  },
+  "verifiedDocs": {},
+  "activeTab": "ESTRAZIONE",
+  "updatedAt": "2026-07-23T15:27:41.325Z"
+}

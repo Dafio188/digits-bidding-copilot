@@ -1,0 +1,65 @@
+{
+  "tenderId": "BB16F0A8B8",
+  "capitolatoText": "FORNITURA CONSUMABILI ORIGINALI PER STAMPANTI",
+  "analysis": {
+    "tenderId": "BB16F0A8B8",
+    "authority": "Stazione Appaltante Estratta",
+    "deadline": "Non definita",
+    "criterioAggiudicazione": "OEPV",
+    "requisitiBloccanti": [
+      "Certificazione ISO 9001"
+    ],
+    "lotti": [
+      {
+        "id": 1,
+        "description": "FORNITURA CONSUMABILI ORIGINALI PER STAMPANTI",
+        "quantity": 1,
+        "requiredSpecs": "Vedere capitolato",
+        "category": "hardware"
+      }
+    ],
+    "documentiRichiesti": [
+      {
+        "nome": "DGUE",
+        "descrizione": "Documento di Gara Unico Europeo (amministrativo)",
+        "tipo": "Amministrativo",
+        "bloccante": true
+      },
+      {
+        "nome": "Offerta Economica",
+        "descrizione": "Modulo di offerta economica firmato",
+        "tipo": "Economico",
+        "bloccante": true
+      }
+    ],
+    "vincoliEsclusione": [
+      "Firma digitale in formato CAdES (.p7m) obbligatoria."
+    ]
+  },
+  "compliance": null,
+  "generatedOffer": {
+    "tenderId": "BB16F0A8B8",
+    "items": [
+      {
+        "lottoId": 1,
+        "lottoDescription": "FORNITURA CONSUMABILI ORIGINALI PER STAMPANTI",
+        "requiredQty": 1,
+        "matchedProductId": "p1",
+        "matchedProductOEM": "HP-CF259X",
+        "unitCost": 90,
+        "unitPrice": 135,
+        "totalPrice": 135,
+        "marginPercentage": 33.33,
+        "status": "MAPPED"
+      }
+    ],
+    "totalCost": 90,
+    "totalPrice": 135,
+    "totalMargin": 45,
+    "marginPercentage": 33.33,
+    "mepaSubmissionNote": "In riferimento alla procedura di acquisto per la fornitura di consumabili per stampanti, la presente offerta prevede la consegna di prodotti rigorosamente originali e conformi ai requisiti tecnici descritti nel capitolato. Nello specifico, si propone il Toner HP 59X ad alta capacità (Codice OEM: HP-CF259X), prodotto che garantisce la piena compatibilità con l'ecosistema hardware in uso e il mantenimento delle garanzie del produttore. Si certifica inoltre che i prodotti offerti sono conformi ai Criteri Ambientali Minimi (CAM) previsti per le forniture della Pubblica Amministrazione, assicurando il rispetto degli standard di sostenibilità e gestione dei rifiuti d'ufficio. La merce verrà consegnata in confezioni originali e integre, con tracciabilità garantita tramite codice OEM."
+  },
+  "verifiedDocs": {},
+  "activeTab": "ESTRAZIONE",
+  "updatedAt": "2026-07-23T15:30:09.953Z"
+}

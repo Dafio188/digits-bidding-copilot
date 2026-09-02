@@ -1,0 +1,50 @@
+{
+  "entries": [
+    {
+      "id": "job-1784794651499",
+      "timestamp": "2026-07-23T08:17:31.499Z",
+      "triggeredBy": "MANUAL",
+      "status": "SUCCESS",
+      "tendersInserted": 0,
+      "tendersTotal": 0,
+      "durationMs": 26234
+    },
+    {
+      "id": "job-1784978564620",
+      "timestamp": "2026-07-25T11:22:44.621Z",
+      "triggeredBy": "MANUAL",
+      "status": "SUCCESS",
+      "tendersInserted": 0,
+      "tendersTotal": 0,
+      "durationMs": 25772
+    },
+    {
+      "id": "job-1784978568394",
+      "timestamp": "2026-07-25T11:22:48.394Z",
+      "triggeredBy": "MANUAL",
+      "status": "SUCCESS",
+      "tendersInserted": 0,
+      "tendersTotal": 0,
+      "durationMs": 25293
+    },
+    {
+      "id": "job-1784978596923",
+      "timestamp": "2026-07-25T11:23:16.924Z",
+      "triggeredBy": "MANUAL",
+      "status": "SUCCESS",
+      "tendersInserted": 0,
+      "tendersTotal": 0,
+      "durationMs": 25903
+    },
+    {
+      "id": "job-1785283200037",
+      "timestamp": "2026-07-29T00:00:00.041Z",
+      "triggeredBy": "CRON",
+      "status": "SUCCESS",
+      "tendersInserted": 0,
+      "tendersTotal": 0,
+      "durationMs": 26215
+    }
+  ],
+  "lastSuccess": "2026-07-29T00:00:26.259Z"
+}

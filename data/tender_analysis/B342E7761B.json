@@ -1,0 +1,107 @@
+{
+  "tenderId": "B342E7761B",
+  "capitolatoText": "Bando di gara a procedura aperta per l'affidamento delle attivitÃ  di formazione specialistica teorico-pratica (Settore EA37) a favore dei docenti delle scuole medie superiori della provincia. Il programma dovrÃ  coprire i moduli di amministrazione sistemi cloud AWS/Azure, fondamenti di programmazione Python e introduzione ai Large Language Models. Requisiti minimi di fatturato annuo del concorrente pari a â‚¬180.000,00 nell'ultimo esercizio finanziario e possesso di accreditamento regionale per la formazione.",
+  "analysis": {
+    "tenderId": "tender-4",
+    "authority": "Amministrazione Provinciale",
+    "deadline": "Non indicata",
+    "criterioAggiudicazione": "Non specificato",
+    "requisitiBloccanti": [
+      "Fatturato annuo minimo di €180.000,00 nell'ultimo esercizio finanziario",
+      "Possesso di accreditamento regionale per la formazione"
+    ],
+    "lotti": [
+      {
+        "id": 1,
+        "description": "Servizio di formazione informatica specialistica teorico-pratica (Settore EA37) per docenti delle scuole medie superiori",
+        "quantity": 1,
+        "estimatedValue": null,
+        "requiredSpecs": "Moduli di amministrazione sistemi cloud AWS/Azure, fondamenti di programmazione Python e introduzione ai Large Language Models",
+        "category": "servizi"
+      }
+    ],
+    "documentiRichiesti": [
+      {
+        "nome": "Certificazione Accreditamento Regionale",
+        "descrizione": "Documentazione comprovante il possesso dell'accreditamento regionale per la formazione",
+        "tipo": "Amministrativo",
+        "bloccante": true
+      },
+      {
+        "nome": "Documentazione Fatturato Annuo",
+        "descrizione": "Dichiarazione o certificazione attestante il fatturato annuo pari o superiore a €180.000,00 nell'ultimo esercizio",
+        "tipo": "Amministrativo",
+        "bloccante": true
+      }
+    ],
+    "vincoliEsclusione": [
+      "Mancato raggiungimento del fatturato minimo annuo di €180.000,00 nell'ultimo esercizio finanziario",
+      "Assenza di accreditamento regionale per la formazione",
+      "Offerta non conforme al settore di formazione EA37"
+    ]
+  },
+  "compliance": {
+    "tenderId": "tender-4",
+    "overallStatus": "APPROVATA",
+    "items": [
+      {
+        "requirement": "Fatturato annuo minimo di €180.000,00 nell'ultimo esercizio finanziario",
+        "status": "CONFORME",
+        "details": "Il fatturato massimo tollerato dell'azienda (€185.000,00) è superiore alla soglia minima richiesta dal bando (€180.000,00)."
+      },
+      {
+        "requirement": "Possesso di accreditamento regionale per la formazione",
+        "status": "CONFORME",
+        "details": "Il profilo aziendale indica esplicitamente il possesso dell'accreditamento per i corsi di formazione."
+      }
+    ],
+    "reason": "L'operatore economico soddisfa tutti i requisiti amministrativi e di fatturato specificati nel bando.",
+    "documentiStato": [
+      {
+        "nome": "Certificazione Accreditamento Regionale",
+        "descrizione": "Documentazione comprovante il possesso dell'accreditamento regionale per la formazione",
+        "tipo": "Amministrativo",
+        "stato": "DA_GENERARE",
+        "azione": "Predisponi la documentazione richiesta per la busta Amministrativo",
+        "verificato": false
+      },
+      {
+        "nome": "Documentazione Fatturato Annuo",
+        "descrizione": "Dichiarazione o certificazione attestante il fatturato annuo pari o superiore a €180.000,00 nell'ultimo esercizio",
+        "tipo": "Amministrativo",
+        "stato": "DA_GENERARE",
+        "azione": "Predisponi la documentazione richiesta per la busta Amministrativo",
+        "verificato": false
+      }
+    ]
+  },
+  "generatedOffer": {
+    "tenderId": "tender-4",
+    "items": [
+      {
+        "lottoId": 1,
+        "lottoDescription": "Servizio di formazione informatica specialistica teorico-pratica (Settore EA37) per docenti delle scuole medie superiori",
+        "requiredQty": 1,
+        "matchedProductId": null,
+        "matchedProductOEM": null,
+        "unitCost": 250000,
+        "unitPrice": 2500,
+        "totalPrice": 2500,
+        "marginPercentage": 0,
+        "status": "NOT_FOUND",
+        "totalCost": 250000
+      }
+    ],
+    "totalCost": 250000,
+    "totalPrice": 2500,
+    "totalMargin": -247500,
+    "marginPercentage": -9900,
+    "mepaSubmissionNote": "In merito alla presente procedura di gara per l'erogazione del servizio di formazione informatica specialistica (Settore EA37), si comunica che il catalogo aziendale è attualmente focalizzato sulla fornitura di beni hardware e materiali di consumo. Non sono state rilevate nel nostro listino prestazioni professionali di docenza o moduli formativi specifici per cloud (AWS/Azure) o programmazione (Python/LLM). Si precisa tuttavia che, laddove l'ente necessitasse di dotazioni strumentali per lo svolgimento delle attività didattiche, la nostra azienda offre prodotti pienamente conformi ai Criteri Ambientali Minimi (CAM) vigenti. I codici OEM di riferimento per la nostra flotta hardware includono, a titolo esemplificativo, DELL-LAT5440 e LEN-T14-G4 per i notebook, e HP-PC-PRO-400 per i sistemi desktop. Tali dispositivi garantiscono elevate prestazioni energetiche (Energy Star / EPEAT) e sono progettati per la massima durabilità e riciclabilità dei componenti, nel pieno rispetto delle clausole ambientali richieste dal Codice degli Appalti per il mercato elettronico (MEPA)."
+  },
+  "verifiedDocs": {
+    "Certificazione Accreditamento Regionale": true,
+    "Documentazione Fatturato Annuo": true
+  },
+  "activeTab": "OFFERTA",
+  "updatedAt": "2026-07-23T14:35:18.292Z"
+}

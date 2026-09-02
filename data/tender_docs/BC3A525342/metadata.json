@@ -1,0 +1,101 @@
+[
+  {
+    "id": "doc-1784743902436",
+    "tenderId": "BC3A525342",
+    "filename": "1784743902431-Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "originalName": "Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "mimeType": "application/pdf",
+    "sizeBytes": 1064275,
+    "uploadedAt": "2026-07-22T18:11:42.436Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": true
+  },
+  {
+    "id": "doc-1784744431772",
+    "tenderId": "BC3A525342",
+    "filename": "1784744431766-Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "originalName": "Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "mimeType": "application/pdf",
+    "sizeBytes": 1064275,
+    "uploadedAt": "2026-07-22T18:20:31.772Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": true
+  },
+  {
+    "id": "doc-1784744729864",
+    "tenderId": "BC3A525342",
+    "filename": "1784744729861-Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "originalName": "Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "mimeType": "application/pdf",
+    "sizeBytes": 1064275,
+    "uploadedAt": "2026-07-22T18:25:29.864Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": true
+  },
+  {
+    "id": "doc-1784746602485",
+    "tenderId": "BC3A525342",
+    "filename": "1784746602478-Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "originalName": "Capitolato_Tecnico_-_Lotto_1_Firmato.pdf",
+    "mimeType": "application/pdf",
+    "sizeBytes": 1064275,
+    "uploadedAt": "2026-07-22T18:56:42.485Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": true
+  },
+  {
+    "id": "doc-1784978596883",
+    "tenderId": "BC3A525342",
+    "filename": "1784978596882-test.docx",
+    "originalName": "test.docx",
+    "mimeType": "application/pdf",
+    "sizeBytes": 4,
+    "uploadedAt": "2026-07-25T11:23:16.883Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": false
+  },
+  {
+    "id": "doc-1784978622246",
+    "tenderId": "BC3A525342",
+    "filename": "1784978622245-evil.html",
+    "originalName": "evil.html",
+    "mimeType": "text/html",
+    "sizeBytes": 53,
+    "uploadedAt": "2026-07-25T11:23:42.246Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": false
+  },
+  {
+    "id": "doc-1784978622258",
+    "tenderId": "BC3A525342",
+    "filename": "1784978622258-shell.php",
+    "originalName": "shell.php",
+    "mimeType": "application/x-php",
+    "sizeBytes": 30,
+    "uploadedAt": "2026-07-25T11:23:42.258Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": false
+  },
+  {
+    "id": "doc-1784978622267",
+    "tenderId": "BC3A525342",
+    "filename": "1784978622266-payload.js",
+    "originalName": "payload.js",
+    "mimeType": "application/javascript",
+    "sizeBytes": 45,
+    "uploadedAt": "2026-07-25T11:23:42.267Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": false
+  },
+  {
+    "id": "doc-1784978622277",
+    "tenderId": "BC3A525342",
+    "filename": "1784978622276-passwd",
+    "originalName": "passwd",
+    "mimeType": "text/plain",
+    "sizeBytes": 9,
+    "uploadedAt": "2026-07-25T11:23:42.277Z",
+    "documentType": "CAPITOLATO",
+    "analyzed": false
+  }
+]

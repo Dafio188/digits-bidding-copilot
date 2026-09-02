@@ -1,0 +1,49 @@
+{
+  "tenderId": "BA37762F24",
+  "capitolatoText": "SOMMINISTRAZIONE DI NR. 1 CORSO DI FORMAZIONE DI VERIFICATORI DI FUNI E CATENE, PER NR. 14 DISCENTI.",
+  "analysis": {
+    "tenderId": "BA37762F24",
+    "authority": "Non specificata",
+    "deadline": "Non specificata",
+    "criterioAggiudicazione": "Non specificato",
+    "requisitiBloccanti": [],
+    "lotti": [
+      {
+        "id": 1,
+        "description": "Corso di formazione di verificatori di funi e catene",
+        "quantity": 1,
+        "estimatedValue": null,
+        "requiredSpecs": "Somministrazione di nr. 1 corso di formazione rivolto a nr. 14 discenti.",
+        "category": "servizi"
+      }
+    ],
+    "documentiRichiesti": [],
+    "vincoliEsclusione": []
+  },
+  "compliance": null,
+  "generatedOffer": {
+    "tenderId": "BA37762F24",
+    "items": [
+      {
+        "lottoId": 1,
+        "lottoDescription": "Corso di formazione di verificatori di funi e catene",
+        "requiredQty": 1,
+        "matchedProductId": null,
+        "matchedProductOEM": null,
+        "unitCost": 0,
+        "unitPrice": 0,
+        "totalPrice": 0,
+        "marginPercentage": 0,
+        "status": "NOT_FOUND"
+      }
+    ],
+    "totalCost": 0,
+    "totalPrice": 0,
+    "totalMargin": 0,
+    "marginPercentage": 0,
+    "mepaSubmissionNote": "Con la presente sottomettiamo la documentazione relativa alla procedura di gara. Si segnala che, a seguito dell'analisi dei requisiti tecnici per il Lotto 1 (Corso di formazione di verificatori di funi e catene), non è stata individuata una corrispondenza idonea nel nostro listino prodotti, il quale è attualmente focalizzato su forniture hardware, periferiche e consumabili IT. Qualora la stazione appaltante richiedesse integrazioni tecnologiche a supporto della formazione (quali notebook, monitor o postazioni desktop), confermiamo che i nostri prodotti rispettano rigorosamente i Criteri Ambientali Minimi (CAM) previsti dal Piano d'Azione Nazionale per il Green Public Procurement (PAN GPP). In particolare, tutti i dispositivi proposti nei nostri listini standard (HP, Dell, Lenovo) sono conformi alle normative RAEE e dotati di certificazioni di efficienza energetica (Energy Star / EPEAT). Restiamo a disposizione per l'inserimento a catalogo di servizi specifici previa valutazione delle competenze tecniche richieste."
+  },
+  "verifiedDocs": {},
+  "activeTab": "ESTRAZIONE",
+  "updatedAt": "2026-07-23T15:26:18.266Z"
+}

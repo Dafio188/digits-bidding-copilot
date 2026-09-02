@@ -1,0 +1,49 @@
+{
+  "tenderId": "6498783",
+  "capitolatoText": "Numero RDO: 6498783 - Fornitura di computer portatili... CONTINUA A LEGGERE.",
+  "analysis": {
+    "tenderId": "2265963",
+    "authority": "Non specificata",
+    "deadline": "Non specificata",
+    "criterioAggiudicazione": "Non specificato",
+    "requisitiBloccanti": [],
+    "lotti": [
+      {
+        "id": 1,
+        "description": "Fornitura di computer portatili",
+        "quantity": 0,
+        "estimatedValue": null,
+        "requiredSpecs": "Non specificate nel testo fornito",
+        "category": "hardware"
+      }
+    ],
+    "documentiRichiesti": [],
+    "vincoliEsclusione": []
+  },
+  "compliance": null,
+  "generatedOffer": {
+    "tenderId": "2265963",
+    "items": [
+      {
+        "lottoId": 1,
+        "lottoDescription": "Fornitura di computer portatili",
+        "requiredQty": 0,
+        "matchedProductId": null,
+        "matchedProductOEM": null,
+        "unitCost": 0,
+        "unitPrice": 0,
+        "totalPrice": 0,
+        "marginPercentage": 0,
+        "status": "NOT_FOUND"
+      }
+    ],
+    "totalCost": 0,
+    "totalPrice": 0,
+    "totalMargin": 0,
+    "marginPercentage": 0,
+    "mepaSubmissionNote": "In riferimento alla procedura di gara per la fornitura di computer portatili (Lotto 1), a seguito dell'analisi dei requisiti tecnici e della categoria merceologica (hardware), si comunica che i prodotti attualmente presenti nel nostro listino aziendale sono relativi esclusivamente a servizi di formazione specialistica e consulenza per la Pubblica Amministrazione. Non disponendo a catalogo di beni hardware conformi ai Criteri Ambientali Minimi (CAM) richiesti per i dispositivi informatici e non potendo associare alcun codice OEM pertinente alla fornitura di PC, non è possibile formulare una proposta economica per il presente lotto. Restiamo a disposizione per future procedure riguardanti i servizi di formazione e digitalizzazione inclusi nel nostro oggetto sociale."
+  },
+  "verifiedDocs": {},
+  "activeTab": "ESTRAZIONE",
+  "updatedAt": "2026-09-02T09:13:48.919Z"
+}

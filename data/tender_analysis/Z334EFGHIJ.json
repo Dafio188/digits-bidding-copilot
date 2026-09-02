@@ -1,0 +1,116 @@
+{
+  "tenderId": "Z334EFGHIJ",
+  "capitolatoText": "Richiesta di Offerta su MePA per l'acquisto di computer, stampanti, cartucce e altri consumabili per uffici comunali.",
+  "analysis": {
+    "tenderId": "RDO_MEPA_MATERIALE_UFFICIO_IT",
+    "authority": "Uffici comunali",
+    "deadline": "Non specificata",
+    "criterioAggiudicazione": "Non specificato",
+    "requisitiBloccanti": [
+      "Iscrizione e abilitazione al portale MePA (Mercato Elettronico della Pubblica Amministrazione)",
+      "Abilitazione ai bandi di categoria merceologica per materiale informatico e consumabili"
+    ],
+    "lotti": [
+      {
+        "id": 1,
+        "description": "Fornitura di computer",
+        "quantity": null,
+        "estimatedValue": null,
+        "requiredSpecs": "Specifiche tecniche minime non specificate nel testo",
+        "category": "hardware"
+      },
+      {
+        "id": 2,
+        "description": "Fornitura di stampanti",
+        "quantity": null,
+        "estimatedValue": null,
+        "requiredSpecs": "Specifiche tecniche minime non specificate nel testo",
+        "category": "hardware"
+      },
+      {
+        "id": 3,
+        "description": "Fornitura di cartucce e altri consumabili",
+        "quantity": null,
+        "estimatedValue": null,
+        "requiredSpecs": "Compatibilità con le periferiche in dotazione agli uffici",
+        "category": "consumabili"
+      }
+    ],
+    "documentiRichiesti": [
+      {
+        "nome": "DGUE",
+        "descrizione": "Documento di Gara Unico Europeo",
+        "tipo": "Amministrativo",
+        "bloccante": true
+      },
+      {
+        "nome": "Offerta Economica",
+        "descrizione": "Modello di offerta economica generato dal sistema MePA",
+        "tipo": "Economico",
+        "bloccante": true
+      },
+      {
+        "nome": "PassOE",
+        "descrizione": "Documento attestante la verifica dei requisiti presso ANAC",
+        "tipo": "Amministrativo",
+        "bloccante": false
+      }
+    ],
+    "vincoliEsclusione": [
+      "Mancata sottoscrizione digitale dei documenti di gara",
+      "Mancata abilitazione al bando MePA di riferimento",
+      "Presentazione dell'offerta oltre la data di scadenza",
+      "Offerte parziali se non previsto esplicitamente dal bando"
+    ]
+  },
+  "compliance": null,
+  "generatedOffer": {
+    "tenderId": "RDO_MEPA_MATERIALE_UFFICIO_IT",
+    "items": [
+      {
+        "lottoId": 1,
+        "lottoDescription": "Fornitura di computer",
+        "requiredQty": 0,
+        "matchedProductId": null,
+        "matchedProductOEM": null,
+        "unitCost": 0,
+        "unitPrice": 0,
+        "totalPrice": 0,
+        "marginPercentage": 0,
+        "status": "NOT_FOUND"
+      },
+      {
+        "lottoId": 2,
+        "lottoDescription": "Fornitura di stampanti",
+        "requiredQty": 0,
+        "matchedProductId": null,
+        "matchedProductOEM": null,
+        "unitCost": 0,
+        "unitPrice": 0,
+        "totalPrice": 0,
+        "marginPercentage": 0,
+        "status": "NOT_FOUND"
+      },
+      {
+        "lottoId": 3,
+        "lottoDescription": "Fornitura di cartucce e altri consumabili",
+        "requiredQty": 0,
+        "matchedProductId": null,
+        "matchedProductOEM": null,
+        "unitCost": 0,
+        "unitPrice": 0,
+        "totalPrice": 0,
+        "marginPercentage": 0,
+        "status": "NOT_FOUND"
+      }
+    ],
+    "totalCost": 0,
+    "totalPrice": 0,
+    "totalMargin": 0,
+    "marginPercentage": 0,
+    "mepaSubmissionNote": "Con la presente sottomissione si comunica formalmente che, a seguito dell'analisi dei lotti 1, 2 e 3 del bando, non è stato possibile procedere all'abbinamento con i prodotti presenti nel catalogo aziendale. Il nostro attuale listino è focalizzato esclusivamente su servizi di formazione specialistica e percorsi formativi per la Pubblica Amministrazione (con particolare riferimento al Nuovo Codice dei Contratti D.Lgs 36/2023, Anticorruzione e Competenze Digitali/IA), categorie che non risultano compatibili con le forniture di hardware e consumabili richieste. Di conseguenza, non è possibile produrre certificazioni di conformità ai Criteri Ambientali Minimi (CAM) né indicare codici OEM per i suddetti beni fisici. Restiamo a disposizione per future consultazioni inerenti l'ambito della formazione e dell'aggiornamento professionale del personale."
+  },
+  "verifiedDocs": {},
+  "activeTab": "ESTRAZIONE",
+  "updatedAt": "2026-07-28T14:21:29.142Z"
+}
